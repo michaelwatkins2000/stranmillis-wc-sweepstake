@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // Replace 'sweepstake' with your actual GitHub repo name
 export default defineConfig({
   plugins: [react()],
-  base: '/sweepstake/',
+  base: '/stranmillis-wc-sweepstake/',
 })
