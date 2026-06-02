@@ -1,0 +1,19 @@
+# Dependencies (like Python's venv — never commit these)
+node_modules/
+
+# Build output
+dist/
+
+# Vite cache
+.vite/
+
+# Environment variables (keep secrets out of git)
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/

@@ -1,0 +1,18 @@
+export const users = [
+  { slug: "wilky",   name: "Wilky",   avatar: "wilky.jpg",   colour: "#e63946" },
+  { slug: "watkins", name: "Watkins", avatar: "watkins.jpg", colour: "#457b9d" },
+  { slug: "ben",     name: "Ben",     avatar: "ben.jpg",     colour: "#2a9d8f" },
+  { slug: "patrick", name: "Patrick", avatar: "patrick.jpg", colour: "#e9c46a" },
+  { slug: "alex",    name: "Alex",    avatar: "alex.jpg",    colour: "#f4a261" },
+  { slug: "lucy",    name: "Lucy",    avatar: "lucy.jpg",    colour: "#c77dff" },
+  { slug: "jack",    name: "Jack",    avatar: "jack.jpg",    colour: "#06d6a0" },
+  { slug: "rachel",  name: "Rachel",  avatar: "rachel.jpg",  colour: "#e76f51" },
+  { slug: "jude",    name: "Jude",    avatar: "jude.jpg",    colour: "#606c38" },
+  { slug: "megan",   name: "Megan",   avatar: "megan.jpg",   colour: "#f72585" },
+  { slug: "jamie",   name: "Jamie",   avatar: "jamie.jpg",   colour: "#bc6c25" },
+  { slug: "lauren",  name: "Lauren",  avatar: "lauren.jpg",  colour: "#8ecae6" },
+  { slug: "gambles", name: "Gambles", avatar: "gambles.jpg", colour: "#219ebc" },
+  { slug: "danny",   name: "Danny",   avatar: "danny.jpg",   colour: "#ffb703" },
+  { slug: "owen",    name: "Owen",    avatar: "owen.jpg",    colour: "#80b918" },
+  { slug: "sam",     name: "Sam",     avatar: "sam.jpg",     colour: "#fb8500" },
+]
