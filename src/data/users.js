@@ -14,5 +14,5 @@ export const users = [
   { slug: "gambles", name: "Gambles", avatar: "gambles.jpg", colour: "#219ebc" },
   { slug: "danny",   name: "Danny",   avatar: "danny.jpg",   colour: "#ffb703" },
   { slug: "owen",    name: "Owen",    avatar: "owen.jpg",    colour: "#80b918" },
-  { slug: "sam",     name: "Sam",     avatar: "sam.jpg",     colour: "#fb8500" },
+  { slug: "colm",    name: "Colm",    avatar: "colm.jpg",    colour: "#fb8500" },
 ]

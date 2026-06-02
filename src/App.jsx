@@ -23,7 +23,7 @@ function UserChip({ user, isActive, onClick }) {
       title={user.name}
     >
       <img
-        src={`/sweepstake/avatars/${user.avatar}`}
+        src={`${import.meta.env.BASE_URL}avatars/${user.avatar}`}
         alt={user.name}
         className="user-chip__avatar"
         onError={e => {

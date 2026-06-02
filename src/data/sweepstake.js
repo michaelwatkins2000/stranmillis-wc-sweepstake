@@ -74,8 +74,8 @@ export const assignments = {
   "Turkey":               { user: "owen",    flag: "tr" },
   "Brazil":               { user: "owen",    flag: "br" },
 
-  // Sam
-  "Jordan":               { user: "sam",     flag: "jo" },
-  "Mexico":               { user: "sam",     flag: "mx" },
-  "Germany":              { user: "sam",     flag: "de" },
+  // Colm
+  "Jordan":               { user: "colm",     flag: "jo" },
+  "Mexico":               { user: "colm",     flag: "mx" },
+  "Germany":              { user: "colm",     flag: "de" },
 }

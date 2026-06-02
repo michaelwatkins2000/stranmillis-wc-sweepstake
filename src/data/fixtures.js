@@ -1,72 +1,120 @@
-// ------------------------------------------------------------
-// EDIT THIS FILE as the tournament progresses:
-//   - Set homeScore / awayScore to numbers once a match is played
-//   - Leave as null for upcoming matches
-//   - Add knockout fixtures once teams are known
-//
-// date: ISO 8601 (YYYY-MM-DD)
-// time: local kick-off time string for display only
-// stage: "group" | "r16" | "qf" | "sf" | "final"
-// group: group letter (A–L) for group stage; null for knockout
-// ------------------------------------------------------------
+// All times are BST (UTC+1). Scores are null until played.
+// Stages: "group" | "r32" | "r16" | "qf" | "sf" | "3rd" | "final"
 
 export const fixtures = [
-  // ── GROUP A ──────────────────────────────────────────────
-  {
-    id: 1, date: "2026-06-11", time: "20:00", stage: "group", group: "A",
-    home: "USA", away: "Mexico",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 2, date: "2026-06-12", time: "17:00", stage: "group", group: "A",
-    home: "Canada", away: "USA",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 3, date: "2026-06-15", time: "20:00", stage: "group", group: "A",
-    home: "Mexico", away: "Canada",
-    homeScore: null, awayScore: null,
-  },
+  // ── Group Stage ──────────────────────────────────────────────────────────
+  { id: 537327, date: "2026-06-11", time: "20:00", stage: "group", group: "A", home: "Mexico",               away: "South Africa",         homeScore: null, awayScore: null },
+  { id: 537328, date: "2026-06-12", time: "03:00", stage: "group", group: "A", home: "South Korea",          away: "Czechia",               homeScore: null, awayScore: null },
+  { id: 537333, date: "2026-06-12", time: "20:00", stage: "group", group: "B", home: "Canada",               away: "Bosnia & Herzegovina",  homeScore: null, awayScore: null },
+  { id: 537345, date: "2026-06-13", time: "02:00", stage: "group", group: "D", home: "USA",                  away: "Paraguay",              homeScore: null, awayScore: null },
+  { id: 537334, date: "2026-06-13", time: "20:00", stage: "group", group: "B", home: "Qatar",                away: "Switzerland",           homeScore: null, awayScore: null },
+  { id: 537339, date: "2026-06-13", time: "23:00", stage: "group", group: "C", home: "Brazil",               away: "Morocco",               homeScore: null, awayScore: null },
+  { id: 537340, date: "2026-06-14", time: "02:00", stage: "group", group: "C", home: "Haiti",                away: "Scotland",              homeScore: null, awayScore: null },
+  { id: 537346, date: "2026-06-14", time: "05:00", stage: "group", group: "D", home: "Australia",            away: "Turkey",                homeScore: null, awayScore: null },
+  { id: 537351, date: "2026-06-14", time: "18:00", stage: "group", group: "E", home: "Germany",              away: "Curaçao",               homeScore: null, awayScore: null },
+  { id: 537357, date: "2026-06-14", time: "21:00", stage: "group", group: "F", home: "Netherlands",          away: "Japan",                 homeScore: null, awayScore: null },
+  { id: 537352, date: "2026-06-15", time: "00:00", stage: "group", group: "E", home: "Ivory Coast",          away: "Ecuador",               homeScore: null, awayScore: null },
+  { id: 537358, date: "2026-06-15", time: "03:00", stage: "group", group: "F", home: "Sweden",               away: "Tunisia",               homeScore: null, awayScore: null },
+  { id: 537369, date: "2026-06-15", time: "17:00", stage: "group", group: "H", home: "Spain",                away: "Cape Verde",            homeScore: null, awayScore: null },
+  { id: 537363, date: "2026-06-15", time: "20:00", stage: "group", group: "G", home: "Belgium",              away: "Egypt",                 homeScore: null, awayScore: null },
+  { id: 537370, date: "2026-06-15", time: "23:00", stage: "group", group: "H", home: "Saudi Arabia",         away: "Uruguay",               homeScore: null, awayScore: null },
+  { id: 537364, date: "2026-06-16", time: "02:00", stage: "group", group: "G", home: "Iran",                 away: "New Zealand",           homeScore: null, awayScore: null },
+  { id: 537391, date: "2026-06-16", time: "20:00", stage: "group", group: "I", home: "France",               away: "Senegal",               homeScore: null, awayScore: null },
+  { id: 537392, date: "2026-06-16", time: "23:00", stage: "group", group: "I", home: "Iraq",                 away: "Norway",                homeScore: null, awayScore: null },
+  { id: 537397, date: "2026-06-17", time: "02:00", stage: "group", group: "J", home: "Argentina",            away: "Algeria",               homeScore: null, awayScore: null },
+  { id: 537398, date: "2026-06-17", time: "05:00", stage: "group", group: "J", home: "Austria",              away: "Jordan",                homeScore: null, awayScore: null },
+  { id: 537403, date: "2026-06-17", time: "18:00", stage: "group", group: "K", home: "Portugal",             away: "DR Congo",              homeScore: null, awayScore: null },
+  { id: 537409, date: "2026-06-17", time: "21:00", stage: "group", group: "L", home: "England",              away: "Croatia",               homeScore: null, awayScore: null },
+  { id: 537410, date: "2026-06-18", time: "00:00", stage: "group", group: "L", home: "Ghana",                away: "Panama",                homeScore: null, awayScore: null },
+  { id: 537404, date: "2026-06-18", time: "03:00", stage: "group", group: "K", home: "Uzbekistan",           away: "Colombia",              homeScore: null, awayScore: null },
+  { id: 537329, date: "2026-06-18", time: "17:00", stage: "group", group: "A", home: "Czechia",              away: "South Africa",          homeScore: null, awayScore: null },
+  { id: 537335, date: "2026-06-18", time: "20:00", stage: "group", group: "B", home: "Switzerland",          away: "Bosnia & Herzegovina",  homeScore: null, awayScore: null },
+  { id: 537336, date: "2026-06-18", time: "23:00", stage: "group", group: "B", home: "Canada",               away: "Qatar",                 homeScore: null, awayScore: null },
+  { id: 537330, date: "2026-06-19", time: "02:00", stage: "group", group: "A", home: "Mexico",               away: "South Korea",           homeScore: null, awayScore: null },
+  { id: 537348, date: "2026-06-19", time: "20:00", stage: "group", group: "D", home: "USA",                  away: "Australia",             homeScore: null, awayScore: null },
+  { id: 537342, date: "2026-06-19", time: "23:00", stage: "group", group: "C", home: "Scotland",             away: "Morocco",               homeScore: null, awayScore: null },
+  { id: 537341, date: "2026-06-20", time: "01:30", stage: "group", group: "C", home: "Brazil",               away: "Haiti",                 homeScore: null, awayScore: null },
+  { id: 537347, date: "2026-06-20", time: "04:00", stage: "group", group: "D", home: "Turkey",               away: "Paraguay",              homeScore: null, awayScore: null },
+  { id: 537359, date: "2026-06-20", time: "18:00", stage: "group", group: "F", home: "Netherlands",          away: "Sweden",                homeScore: null, awayScore: null },
+  { id: 537353, date: "2026-06-20", time: "21:00", stage: "group", group: "E", home: "Germany",              away: "Ivory Coast",           homeScore: null, awayScore: null },
+  { id: 537354, date: "2026-06-21", time: "01:00", stage: "group", group: "E", home: "Ecuador",              away: "Curaçao",               homeScore: null, awayScore: null },
+  { id: 537360, date: "2026-06-21", time: "05:00", stage: "group", group: "F", home: "Tunisia",              away: "Japan",                 homeScore: null, awayScore: null },
+  { id: 537371, date: "2026-06-21", time: "17:00", stage: "group", group: "H", home: "Spain",                away: "Saudi Arabia",          homeScore: null, awayScore: null },
+  { id: 537365, date: "2026-06-21", time: "20:00", stage: "group", group: "G", home: "Belgium",              away: "Iran",                  homeScore: null, awayScore: null },
+  { id: 537372, date: "2026-06-21", time: "23:00", stage: "group", group: "H", home: "Uruguay",              away: "Cape Verde",            homeScore: null, awayScore: null },
+  { id: 537366, date: "2026-06-22", time: "02:00", stage: "group", group: "G", home: "New Zealand",          away: "Egypt",                 homeScore: null, awayScore: null },
+  { id: 537399, date: "2026-06-22", time: "18:00", stage: "group", group: "J", home: "Argentina",            away: "Austria",               homeScore: null, awayScore: null },
+  { id: 537393, date: "2026-06-22", time: "22:00", stage: "group", group: "I", home: "France",               away: "Iraq",                  homeScore: null, awayScore: null },
+  { id: 537394, date: "2026-06-23", time: "01:00", stage: "group", group: "I", home: "Norway",               away: "Senegal",               homeScore: null, awayScore: null },
+  { id: 537400, date: "2026-06-23", time: "04:00", stage: "group", group: "J", home: "Jordan",               away: "Algeria",               homeScore: null, awayScore: null },
+  { id: 537405, date: "2026-06-23", time: "18:00", stage: "group", group: "K", home: "Portugal",             away: "Uzbekistan",            homeScore: null, awayScore: null },
+  { id: 537411, date: "2026-06-23", time: "21:00", stage: "group", group: "L", home: "England",              away: "Ghana",                 homeScore: null, awayScore: null },
+  { id: 537412, date: "2026-06-24", time: "00:00", stage: "group", group: "L", home: "Panama",               away: "Croatia",               homeScore: null, awayScore: null },
+  { id: 537406, date: "2026-06-24", time: "03:00", stage: "group", group: "K", home: "Colombia",             away: "DR Congo",              homeScore: null, awayScore: null },
+  { id: 537337, date: "2026-06-24", time: "20:00", stage: "group", group: "B", home: "Switzerland",          away: "Canada",                homeScore: null, awayScore: null },
+  { id: 537338, date: "2026-06-24", time: "20:00", stage: "group", group: "B", home: "Bosnia & Herzegovina", away: "Qatar",                 homeScore: null, awayScore: null },
+  { id: 537344, date: "2026-06-24", time: "23:00", stage: "group", group: "C", home: "Morocco",              away: "Haiti",                 homeScore: null, awayScore: null },
+  { id: 537343, date: "2026-06-24", time: "23:00", stage: "group", group: "C", home: "Scotland",             away: "Brazil",                homeScore: null, awayScore: null },
+  { id: 537331, date: "2026-06-25", time: "02:00", stage: "group", group: "A", home: "Czechia",              away: "Mexico",                homeScore: null, awayScore: null },
+  { id: 537332, date: "2026-06-25", time: "02:00", stage: "group", group: "A", home: "South Africa",         away: "South Korea",           homeScore: null, awayScore: null },
+  { id: 537355, date: "2026-06-25", time: "21:00", stage: "group", group: "E", home: "Ecuador",              away: "Germany",               homeScore: null, awayScore: null },
+  { id: 537356, date: "2026-06-25", time: "21:00", stage: "group", group: "E", home: "Curaçao",              away: "Ivory Coast",           homeScore: null, awayScore: null },
+  { id: 537361, date: "2026-06-26", time: "00:00", stage: "group", group: "F", home: "Tunisia",              away: "Netherlands",           homeScore: null, awayScore: null },
+  { id: 537362, date: "2026-06-26", time: "00:00", stage: "group", group: "F", home: "Japan",                away: "Sweden",                homeScore: null, awayScore: null },
+  { id: 537349, date: "2026-06-26", time: "03:00", stage: "group", group: "D", home: "Turkey",               away: "USA",                   homeScore: null, awayScore: null },
+  { id: 537350, date: "2026-06-26", time: "03:00", stage: "group", group: "D", home: "Paraguay",             away: "Australia",             homeScore: null, awayScore: null },
+  { id: 537395, date: "2026-06-26", time: "20:00", stage: "group", group: "I", home: "Norway",               away: "France",                homeScore: null, awayScore: null },
+  { id: 537396, date: "2026-06-26", time: "20:00", stage: "group", group: "I", home: "Senegal",              away: "Iraq",                  homeScore: null, awayScore: null },
+  { id: 537373, date: "2026-06-27", time: "01:00", stage: "group", group: "H", home: "Uruguay",              away: "Spain",                 homeScore: null, awayScore: null },
+  { id: 537374, date: "2026-06-27", time: "01:00", stage: "group", group: "H", home: "Cape Verde",           away: "Saudi Arabia",          homeScore: null, awayScore: null },
+  { id: 537367, date: "2026-06-27", time: "04:00", stage: "group", group: "G", home: "New Zealand",          away: "Belgium",               homeScore: null, awayScore: null },
+  { id: 537368, date: "2026-06-27", time: "04:00", stage: "group", group: "G", home: "Egypt",                away: "Iran",                  homeScore: null, awayScore: null },
+  { id: 537413, date: "2026-06-27", time: "22:00", stage: "group", group: "L", home: "Panama",               away: "England",               homeScore: null, awayScore: null },
+  { id: 537414, date: "2026-06-27", time: "22:00", stage: "group", group: "L", home: "Croatia",              away: "Ghana",                 homeScore: null, awayScore: null },
+  { id: 537407, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "Colombia",             away: "Portugal",              homeScore: null, awayScore: null },
+  { id: 537408, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "DR Congo",             away: "Uzbekistan",            homeScore: null, awayScore: null },
+  { id: 537401, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Jordan",               away: "Argentina",             homeScore: null, awayScore: null },
+  { id: 537402, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Algeria",              away: "Austria",               homeScore: null, awayScore: null },
 
-  // ── GROUP B ──────────────────────────────────────────────
-  {
-    id: 4, date: "2026-06-12", time: "20:00", stage: "group", group: "B",
-    home: "Brazil", away: "Argentina",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 5, date: "2026-06-13", time: "17:00", stage: "group", group: "B",
-    home: "Colombia", away: "Brazil",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 6, date: "2026-06-16", time: "20:00", stage: "group", group: "B",
-    home: "Argentina", away: "Colombia",
-    homeScore: null, awayScore: null,
-  },
+  // ── Round of 32 ──────────────────────────────────────────────────────────
+  { id: 537417, date: "2026-06-28", time: "20:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537423, date: "2026-06-29", time: "18:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537415, date: "2026-06-29", time: "21:30", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537418, date: "2026-06-30", time: "02:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537424, date: "2026-06-30", time: "18:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537416, date: "2026-06-30", time: "22:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537425, date: "2026-07-01", time: "02:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537426, date: "2026-07-01", time: "17:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537422, date: "2026-07-01", time: "21:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537421, date: "2026-07-02", time: "01:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537420, date: "2026-07-02", time: "20:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537419, date: "2026-07-03", time: "00:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537429, date: "2026-07-03", time: "04:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537428, date: "2026-07-03", time: "19:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537427, date: "2026-07-03", time: "23:00", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537430, date: "2026-07-04", time: "02:30", stage: "r32", group: null, home: null, away: null, homeScore: null, awayScore: null },
 
-  // ── GROUP C ──────────────────────────────────────────────
-  {
-    id: 7, date: "2026-06-13", time: "20:00", stage: "group", group: "C",
-    home: "France", away: "England",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 8, date: "2026-06-14", time: "17:00", stage: "group", group: "C",
-    home: "Germany", away: "France",
-    homeScore: null, awayScore: null,
-  },
-  {
-    id: 9, date: "2026-06-17", time: "20:00", stage: "group", group: "C",
-    home: "England", away: "Germany",
-    homeScore: null, awayScore: null,
-  },
+  // ── Round of 16 ──────────────────────────────────────────────────────────
+  { id: 537376, date: "2026-07-04", time: "18:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537375, date: "2026-07-04", time: "22:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537377, date: "2026-07-05", time: "21:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537378, date: "2026-07-06", time: "01:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537379, date: "2026-07-06", time: "20:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537380, date: "2026-07-07", time: "01:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537381, date: "2026-07-07", time: "17:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537382, date: "2026-07-07", time: "21:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
 
-  // ── KNOCKOUT (fill in once teams qualify) ─────────────────
-  // Round of 16 — add 8 fixtures here once group stage is done
-  // {
-  //   id: 100, date: "2026-07-04", time: "20:00", stage: "r16", group: null,
-  //   home: "Winner Group A", away: "Runner-up Group B",
-  //   homeScore: null, awayScore: null,
-  // },
+  // ── Quarter-finals ───────────────────────────────────────────────────────
+  { id: 537383, date: "2026-07-09", time: "21:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537384, date: "2026-07-10", time: "20:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537385, date: "2026-07-11", time: "22:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537386, date: "2026-07-12", time: "02:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+
+  // ── Semi-finals ──────────────────────────────────────────────────────────
+  { id: 537387, date: "2026-07-14", time: "20:00", stage: "sf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537388, date: "2026-07-15", time: "20:00", stage: "sf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+
+  // ── Third place & Final ──────────────────────────────────────────────────
+  { id: 537389, date: "2026-07-18", time: "22:00", stage: "3rd",   group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537390, date: "2026-07-19", time: "20:00", stage: "final", group: null, home: null, away: null, homeScore: null, awayScore: null },
 ]
