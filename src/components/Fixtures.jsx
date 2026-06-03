@@ -3,13 +3,11 @@ import { fixtures } from '../data/fixtures'
 import { assignments } from '../data/sweepstake'
 import { users } from '../data/users'
 
-// Helper: format ISO date to readable string
 function formatDate(iso) {
   const d = new Date(iso + 'T00:00:00')
   return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long' })
 }
 
-// Helper: group fixtures by date
 function groupByDate(fixtureList) {
   return fixtureList.reduce((acc, f) => {
     if (!acc[f.date]) acc[f.date] = []
@@ -18,37 +16,52 @@ function groupByDate(fixtureList) {
   }, {})
 }
 
-function TeamChip({ team }) {
-  const info = assignments[team]
-  const user = info ? users.find(u => u.slug === info.user) : null
-  const flagSrc = info ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${info.flag}.svg` : null
+function AvatarBubble({ user }) {
+  return (
+    <div
+      className="avatar-bubble"
+      style={{ '--colour': user?.colour || 'var(--border)' }}
+    >
+      {user
+        ? <img
+            src={`${import.meta.env.BASE_URL}avatars/${user.avatar}`}
+            alt={user.name}
+            className="avatar-bubble__img"
+            onError={e => { e.target.style.display = 'none' }}
+          />
+        : <span className="avatar-bubble__placeholder">?</span>
+      }
+    </div>
+  )
+}
+
+function TeamSide({ team, user, align }) {
+  const info = team ? assignments[team] : null
+  const flagSrc = info
+    ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${info.flag}.svg`
+    : null
 
   return (
-    <div className="team-chip">
-      {flagSrc && (
-        <img
-          src={flagSrc}
-          alt={`${team} flag`}
-          className="team-flag"
-          onError={e => { e.target.style.display = 'none' }}
-        />
-      )}
-      <span className="team-name">{team}</span>
-      {user && (
-        <span
-          className="team-owner-badge"
-          style={{ backgroundColor: user.colour + '33', color: user.colour, borderColor: user.colour + '66' }}
-        >
-          {user.name}
-        </span>
-      )}
+    <div className={`team-side team-side--${align}`}>
+      <AvatarBubble user={user} />
+      <div className="team-side__info">
+        {flagSrc && (
+          <img
+            src={flagSrc}
+            alt=""
+            className="team-flag team-flag--md"
+            onError={e => { e.target.style.display = 'none' }}
+          />
+        )}
+        <span className="team-side__name">{team || 'TBD'}</span>
+      </div>
     </div>
   )
 }
 
 function MatchCard({ fixture, highlightUsers }) {
-  const homeInfo = assignments[fixture.home]
-  const awayInfo = assignments[fixture.away]
+  const homeInfo = fixture.home ? assignments[fixture.home] : null
+  const awayInfo = fixture.away ? assignments[fixture.away] : null
   const homeUser = homeInfo ? users.find(u => u.slug === homeInfo.user) : null
   const awayUser = awayInfo ? users.find(u => u.slug === awayInfo.user) : null
 
@@ -58,21 +71,28 @@ function MatchCard({ fixture, highlightUsers }) {
     (awayUser && highlightUsers.includes(awayUser.slug))
 
   const isPlayed = fixture.homeScore !== null && fixture.awayScore !== null
+  const stageLabel = fixture.group ? `Group ${fixture.group}` : fixture.stage.toUpperCase()
 
   return (
     <div className={`match-card ${!isHighlighted ? 'match-card--dim' : ''} ${isPlayed ? 'match-card--played' : ''}`}>
-      <div className="match-card__stage">
-        {fixture.group ? `Group ${fixture.group}` : fixture.stage.toUpperCase()} · {fixture.time}
-      </div>
-      <div className="match-card__teams">
-        <TeamChip team={fixture.home} />
-        <div className="match-card__score">
-          {isPlayed
-            ? <span className="score">{fixture.homeScore} – {fixture.awayScore}</span>
-            : <span className="score score--upcoming">vs</span>
-          }
+      <div className="match-card__body">
+        <TeamSide team={fixture.home} user={homeUser} align="left" />
+        <div className="match-card__centre">
+          <span className="match-card__meta">{stageLabel} · {fixture.time} BST</span>
+          <div className="match-card__versus">
+            <span className="match-card__username" style={{ color: homeUser?.colour }}>
+              {homeUser?.name || '—'}
+            </span>
+            {isPlayed
+              ? <span className="score">{fixture.homeScore} – {fixture.awayScore}</span>
+              : <span className="score score--upcoming">vs</span>
+            }
+            <span className="match-card__username" style={{ color: awayUser?.colour }}>
+              {awayUser?.name || '—'}
+            </span>
+          </div>
         </div>
-        <TeamChip team={fixture.away} />
+        <TeamSide team={fixture.away} user={awayUser} align="right" />
       </div>
     </div>
   )
@@ -91,12 +111,10 @@ export function Fixtures({ selectedUser }) {
 
   const byDate = groupByDate(filtered)
   const sortedDates = Object.keys(byDate).sort()
-
   const highlightUsers = selectedUser ? [selectedUser] : null
 
   return (
     <div className="tab-content">
-      {/* Stage filter pills */}
       <div className="filter-pills">
         {['all', 'upcoming', 'played'].map(f => (
           <button
