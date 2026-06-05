@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './App.css'
 
 import { users } from './data/users'
@@ -21,17 +21,19 @@ const TAB_IDS = TABS.filter(t => !t.href).map(t => t.id)
 export default function App() {
   const [activeTab, setActiveTab] = useState('fixtures')
   const [selectedUser, setSelectedUser] = useState(null)
-  const [slideDir, setSlideDir] = useState('right')
   const [animKey, setAnimKey] = useState(0)
+  const activeTabRef = useRef('fixtures')
+  const slideDirRef = useRef('right')
 
   const toggleUser = (slug) => {
     setSelectedUser(prev => (prev === slug ? null : slug))
   }
 
   const handleTabChange = (tabId) => {
-    const currentIdx = TAB_IDS.indexOf(activeTab)
+    const currentIdx = TAB_IDS.indexOf(activeTabRef.current)
     const newIdx = TAB_IDS.indexOf(tabId)
-    setSlideDir(newIdx >= currentIdx ? 'right' : 'left')
+    slideDirRef.current = newIdx >= currentIdx ? 'right' : 'left'
+    activeTabRef.current = tabId
     setAnimKey(k => k + 1)
     setActiveTab(tabId)
   }
@@ -108,11 +110,13 @@ export default function App() {
       </nav>
 
       {/* ── Tab Content ── */}
-      <div key={animKey} className={`tab-slide-${slideDir}`}>
-        {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
-        {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
-        {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
-        {activeTab === 'postit'   && <PostItBoard />}
+      <div className="tab-content-clip">
+        <div key={animKey} className={`tab-slide-${slideDirRef.current}`}>
+          {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
+          {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
+          {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
+          {activeTab === 'postit'   && <PostItBoard />}
+        </div>
       </div>
     </div>
   )
