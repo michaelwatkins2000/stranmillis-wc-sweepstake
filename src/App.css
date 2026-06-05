@@ -463,7 +463,17 @@ button { cursor: pointer; font-family: inherit; }
 .team-inline { display: flex; align-items: center; gap: 0.4rem; }
 
 .col-pts { font-weight: 700; color: var(--gold); }
-.col-owner { min-width: 80px; }
+.col-owner { width: 36px; text-align: center; }
+
+.owner-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid;
+  display: block;
+  margin: 0 auto;
+}
 
 .gd--pos { color: #4caf85; }
 .gd--neg { color: #e05a5a; }
@@ -670,7 +680,7 @@ button { cursor: pointer; font-family: inherit; }
   /* Groups: single column */
   .groups-grid { grid-template-columns: 1fr; }
   .standings-table { font-size: 0.75rem; }
-  .col-owner { display: none; }
+  .col-wdl { display: none; }
 
   /* Knockout */
   .bracket-round { min-width: 150px; }
