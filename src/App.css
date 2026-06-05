@@ -36,19 +36,25 @@ html { font-size: 16px; }
 
 body {
   background-color: var(--bg);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 64px,
-      rgba(255, 255, 255, 0.055) 64px,
-      rgba(255, 255, 255, 0.055) 128px
-    );
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.5;
   min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 64px,
+    rgba(255, 255, 255, 0.055) 64px,
+    rgba(255, 255, 255, 0.055) 128px
+  );
 }
 
 img { display: block; max-width: 100%; }
