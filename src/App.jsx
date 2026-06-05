@@ -8,37 +8,13 @@ import { Knockout } from './components/Knockout'
 import { PostItBoard } from './components/PostItBoard'
 
 const TABS = [
-  { id: 'fixtures',  label: '🗓 Fixtures' },
-  { id: 'groups',    label: '📊 Groups' },
-  { id: 'knockout',  label: '🏆 Knockout' },
-  { id: 'postit',    label: '📌 Challenges' },
+  { id: 'fixtures',   label: '🗓 Fixtures' },
+  { id: 'groups',     label: '📊 Groups' },
+  { id: 'knockout',   label: '🥊 Knockout' },
+  { id: 'postit',     label: '📌 Challenges' },
+  { id: 'champions',  label: '🏆 Champions', href: 'https://www.youtube.com/watch?v=RJqimlFcJsM' },
 ]
 
-function UserChip({ user, isActive, onClick }) {
-  return (
-    <button
-      className={`user-chip ${isActive ? 'user-chip--active' : ''}`}
-      onClick={onClick}
-      style={isActive ? { borderColor: user.colour, color: user.colour } : {}}
-      title={user.name}
-    >
-      <img
-        src={`${import.meta.env.BASE_URL}avatars/${user.avatar}`}
-        alt={user.name}
-        className="user-chip__avatar"
-        onError={e => {
-          e.target.style.display = 'none'
-          // Show initial fallback
-          const span = document.createElement('span')
-          span.className = 'user-chip__avatar--placeholder'
-          span.textContent = user.name[0]
-          e.target.parentNode.insertBefore(span, e.target)
-        }}
-      />
-      {user.name}
-    </button>
-  )
-}
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('fixtures')
@@ -88,17 +64,16 @@ export default function App() {
 
       {/* ── User Filter ── */}
       <div className="user-filter">
-        <p className="user-filter__label">Filter by participant</p>
-        <div className="user-filter__chips">
+        <select
+          className="user-filter__select"
+          value={selectedUser || ''}
+          onChange={e => setSelectedUser(e.target.value || null)}
+        >
+          <option value="">All participants</option>
           {users.map(user => (
-            <UserChip
-              key={user.slug}
-              user={user}
-              isActive={selectedUser === user.slug}
-              onClick={() => toggleUser(user.slug)}
-            />
+            <option key={user.slug} value={user.slug}>{user.name}</option>
           ))}
-        </div>
+        </select>
       </div>
 
       {/* ── Tab Nav ── */}
@@ -107,7 +82,13 @@ export default function App() {
           <button
             key={tab.id}
             className={`tab-btn ${activeTab === tab.id ? 'tab-btn--active' : ''}`}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => {
+              if (tab.href) {
+                window.open(tab.href, '_blank', 'noopener,noreferrer')
+              } else {
+                setActiveTab(tab.id)
+              }
+            }}
           >
             {tab.label}
           </button>

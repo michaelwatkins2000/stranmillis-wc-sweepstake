@@ -44,6 +44,7 @@ body {
       rgba(255, 255, 255, 0.055) 64px,
       rgba(255, 255, 255, 0.055) 128px
     );
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.5;
@@ -183,62 +184,33 @@ button { cursor: pointer; font-family: inherit; }
   margin-bottom: 1.5rem;
 }
 
-.user-filter__label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 0.6rem;
-}
-
-.user-filter__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.user-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.75rem 0.35rem 0.45rem;
-  border-radius: 999px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  font-family: var(--font-body);
-  transition: all 0.15s;
-}
-
-.user-chip:hover {
-  border-color: var(--gold);
+.user-filter__select {
+  width: 100%;
+  padding: 0.55rem 2.25rem 0.55rem 0.85rem;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
   color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a9e80' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.15s;
 }
 
-.user-chip--active {
+.user-filter__select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.user-filter__select option {
   background: var(--bg-card);
   color: var(--text);
-}
-
-.user-chip__avatar {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: var(--bg-card-alt);
-}
-
-.user-chip__avatar--placeholder {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--bg-card-alt);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: var(--text-muted);
 }
 
 /* ── Tab Nav ──────────────────────────────────────── */
@@ -248,6 +220,12 @@ button { cursor: pointer; font-family: inherit; }
   border-bottom: 1px solid var(--border);
   margin-bottom: 1.5rem;
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
 }
 
 .tab-nav::-webkit-scrollbar { display: none; }
@@ -784,16 +762,6 @@ button { cursor: pointer; font-family: inherit; }
     height: 38px;
     margin: 0 -4px;
   }
-
-  /* User filter: single scrollable row instead of wrapping grid */
-  .user-filter__chips {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.25rem;
-    -webkit-overflow-scrolling: touch;
-  }
-  .user-filter__chips::-webkit-scrollbar { display: none; }
-  .user-chip { flex-shrink: 0; }
 
   /* Match cards */
   .match-card { padding: 0.5rem 0.6rem; }

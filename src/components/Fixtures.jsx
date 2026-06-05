@@ -56,16 +56,11 @@ function TeamInfo({ team, dimmed }) {
   )
 }
 
-function MatchCard({ fixture, highlightUsers }) {
+function MatchCard({ fixture }) {
   const homeInfo = fixture.home ? assignments[fixture.home] : null
   const awayInfo = fixture.away ? assignments[fixture.away] : null
   const homeUser = homeInfo ? users.find(u => u.slug === homeInfo.user) : null
   const awayUser = awayInfo ? users.find(u => u.slug === awayInfo.user) : null
-
-  const isHighlighted =
-    !highlightUsers ||
-    (homeUser && highlightUsers.includes(homeUser.slug)) ||
-    (awayUser && highlightUsers.includes(awayUser.slug))
 
   const isPlayed = fixture.homeScore !== null && fixture.awayScore !== null
   const homeLoses = isPlayed && fixture.homeScore < fixture.awayScore
@@ -73,7 +68,7 @@ function MatchCard({ fixture, highlightUsers }) {
   const stageLabel = fixture.group ? `Group ${fixture.group}` : fixture.stage.toUpperCase()
 
   return (
-    <div className={`match-card ${!isHighlighted ? 'match-card--dim' : ''} ${isPlayed ? 'match-card--played' : ''}`}>
+    <div className={`match-card ${isPlayed ? 'match-card--played' : ''}`}>
 
       {/* ── Header: meta + usernames ── */}
       <div className="match-card__header">
@@ -117,15 +112,19 @@ export function Fixtures({ selectedUser }) {
 
   const filtered = useMemo(() => {
     return fixtures.filter(f => {
-      if (stageFilter === 'upcoming') return f.homeScore === null
-      if (stageFilter === 'played') return f.homeScore !== null
+      if (stageFilter === 'upcoming' && f.homeScore !== null) return false
+      if (stageFilter === 'played'   && f.homeScore === null) return false
+      if (selectedUser) {
+        const homeOwner = f.home ? assignments[f.home]?.user : null
+        const awayOwner = f.away ? assignments[f.away]?.user : null
+        if (homeOwner !== selectedUser && awayOwner !== selectedUser) return false
+      }
       return true
     })
-  }, [stageFilter])
+  }, [stageFilter, selectedUser])
 
   const byDate = groupByDate(filtered)
   const sortedDates = Object.keys(byDate).sort()
-  const highlightUsers = selectedUser ? [selectedUser] : null
 
   return (
     <div className="tab-content">
@@ -150,7 +149,7 @@ export function Fixtures({ selectedUser }) {
           <h3 className="date-group__label">{formatDate(date)}</h3>
           <div className="match-list">
             {byDate[date].map(f => (
-              <MatchCard key={f.id} fixture={f} highlightUsers={highlightUsers} />
+              <MatchCard key={f.id} fixture={f} />
             ))}
           </div>
         </div>
