@@ -52,8 +52,38 @@ export default function App() {
     <div className="app">
       {/* ── Header ── */}
       <header className="app-header">
-        <h1 className="app-header__title">World Cup Sweepstake</h1>
-        <p className="app-header__subtitle">2026 · Canada · Mexico · USA</p>
+        <div className="app-header__title-row">
+          <h1 className="app-header__title">World Cup Sweepstake</h1>
+        </div>
+        <p className="app-header__subtitle">
+          <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/ca.svg" alt="Canada" className="host-flag" />
+          Canada
+          <span className="host-sep">·</span>
+          <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/mx.svg" alt="Mexico" className="host-flag" />
+          Mexico
+          <span className="host-sep">·</span>
+          <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/us.svg" alt="USA" className="host-flag" />
+          USA
+        </p>
+        <div className="app-header__divider" />
+        <p className="app-header__crew-label">The Crew</p>
+        <div className="app-header__crew">
+          {users.map(user => (
+            <div
+              key={user.slug}
+              className={`crew-avatar ${selectedUser === user.slug ? 'crew-avatar--active' : ''}`}
+              style={{ '--colour': user.colour }}
+              title={user.name}
+              onClick={() => toggleUser(user.slug)}
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}avatars/${user.avatar}`}
+                alt={user.name}
+                onError={e => { e.target.style.display = 'none' }}
+              />
+            </div>
+          ))}
+        </div>
       </header>
 
       {/* ── User Filter ── */}
