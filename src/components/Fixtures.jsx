@@ -16,10 +16,10 @@ function groupByDate(fixtureList) {
   }, {})
 }
 
-function AvatarBubble({ user }) {
+function AvatarBubble({ user, dimmed }) {
   return (
     <div
-      className="avatar-bubble"
+      className={`avatar-bubble${dimmed ? ' avatar-bubble--dim' : ''}`}
       style={{ '--colour': user?.colour || 'var(--border)' }}
     >
       {user
@@ -35,26 +35,23 @@ function AvatarBubble({ user }) {
   )
 }
 
-function TeamSide({ team, user, align }) {
+function TeamInfo({ team, dimmed }) {
   const info = team ? assignments[team] : null
   const flagSrc = info
     ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${info.flag}.svg`
     : null
 
   return (
-    <div className={`team-side team-side--${align}`}>
-      <AvatarBubble user={user} />
-      <div className="team-side__info">
-        {flagSrc && (
-          <img
-            src={flagSrc}
-            alt=""
-            className="team-flag team-flag--md"
-            onError={e => { e.target.style.display = 'none' }}
-          />
-        )}
-        <span className="team-side__name">{team || 'TBD'}</span>
-      </div>
+    <div className={`team-info${dimmed ? ' team-info--dim' : ''}`}>
+      {flagSrc && (
+        <img
+          src={flagSrc}
+          alt=""
+          className="team-flag team-flag--md"
+          onError={e => { e.target.style.display = 'none' }}
+        />
+      )}
+      <span className="team-side__name">{team || 'TBD'}</span>
     </div>
   )
 }
@@ -71,29 +68,46 @@ function MatchCard({ fixture, highlightUsers }) {
     (awayUser && highlightUsers.includes(awayUser.slug))
 
   const isPlayed = fixture.homeScore !== null && fixture.awayScore !== null
+  const homeLoses = isPlayed && fixture.homeScore < fixture.awayScore
+  const awayLoses = isPlayed && fixture.awayScore < fixture.homeScore
   const stageLabel = fixture.group ? `Group ${fixture.group}` : fixture.stage.toUpperCase()
 
   return (
     <div className={`match-card ${!isHighlighted ? 'match-card--dim' : ''} ${isPlayed ? 'match-card--played' : ''}`}>
-      <div className="match-card__body">
-        <TeamSide team={fixture.home} user={homeUser} align="left" />
-        <div className="match-card__centre">
-          <span className="match-card__meta">{stageLabel} · {fixture.time} BST</span>
-          <div className="match-card__versus">
-            <span className="match-card__username" style={{ color: homeUser?.colour }}>
-              {homeUser?.name || '—'}
-            </span>
-            {isPlayed
-              ? <span className="score">{fixture.homeScore} – {fixture.awayScore}</span>
-              : <span className="score score--upcoming">vs</span>
-            }
-            <span className="match-card__username" style={{ color: awayUser?.colour }}>
-              {awayUser?.name || '—'}
-            </span>
-          </div>
+
+      {/* ── Header: meta + usernames ── */}
+      <div className="match-card__header">
+        <span className="match-card__meta">{stageLabel} · {fixture.time} BST</span>
+        <div className="match-card__versus">
+          <span className="match-card__username" style={{ color: homeUser?.colour }}>
+            {homeUser?.name || '—'}
+          </span>
+          <span className="match-card__vs-text">vs</span>
+          <span className="match-card__username" style={{ color: awayUser?.colour }}>
+            {awayUser?.name || '—'}
+          </span>
         </div>
-        <TeamSide team={fixture.away} user={awayUser} align="right" />
       </div>
+
+      {/* ── Body: avatar | team-info | swords | team-info | avatar ── */}
+      <div className="match-card__body">
+        <AvatarBubble user={homeUser} dimmed={homeLoses} />
+        <TeamInfo team={fixture.home} dimmed={homeLoses} />
+        <div className="match-card__swords">
+          <img src={`${import.meta.env.BASE_URL}assets/vs_swords.png`} alt="vs" className="vs-swords" />
+        </div>
+        <TeamInfo team={fixture.away} dimmed={awayLoses} />
+        <AvatarBubble user={awayUser} dimmed={awayLoses} />
+      </div>
+
+      {/* ── Footer: score ── */}
+      <div className="match-card__footer">
+        {isPlayed
+          ? <span className="score">{fixture.homeScore} – {fixture.awayScore}</span>
+          : <span className="score score--tbd">TBD – TBD</span>
+        }
+      </div>
+
     </div>
   )
 }
