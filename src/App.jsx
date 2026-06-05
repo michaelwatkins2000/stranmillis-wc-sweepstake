@@ -16,12 +16,24 @@ const TABS = [
 ]
 
 
+const TAB_IDS = TABS.filter(t => !t.href).map(t => t.id)
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('fixtures')
   const [selectedUser, setSelectedUser] = useState(null)
+  const [slideDir, setSlideDir] = useState('right')
+  const [animKey, setAnimKey] = useState(0)
 
   const toggleUser = (slug) => {
     setSelectedUser(prev => (prev === slug ? null : slug))
+  }
+
+  const handleTabChange = (tabId) => {
+    const currentIdx = TAB_IDS.indexOf(activeTab)
+    const newIdx = TAB_IDS.indexOf(tabId)
+    setSlideDir(newIdx >= currentIdx ? 'right' : 'left')
+    setAnimKey(k => k + 1)
+    setActiveTab(tabId)
   }
 
   return (
@@ -86,7 +98,7 @@ export default function App() {
               if (tab.href) {
                 window.open(tab.href, '_blank', 'noopener,noreferrer')
               } else {
-                setActiveTab(tab.id)
+                handleTabChange(tab.id)
               }
             }}
           >
@@ -96,10 +108,12 @@ export default function App() {
       </nav>
 
       {/* ── Tab Content ── */}
-      {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
-      {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
-      {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
-      {activeTab === 'postit'   && <PostItBoard />}
+      <div key={animKey} className={`tab-slide-${slideDir}`}>
+        {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
+        {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
+        {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
+        {activeTab === 'postit'   && <PostItBoard />}
+      </div>
     </div>
   )
 }
