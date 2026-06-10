@@ -1,8 +1,25 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { users } from '../data/users'
+import { fixtures } from '../data/fixtures'
+import { assignments } from '../data/sweepstake'
 
 const FILTERS = ['all', 'open', 'accepted', 'completed', 'rejected']
+
+const UPCOMING = fixtures.filter(f =>
+  f.home && f.away && f.homeScore === null && f.awayScore === null
+)
+
+function flagUrl(team) {
+  const code = assignments[team]?.flag
+  return code ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${code}.svg` : null
+}
+
+function formatFixtureLabel(f) {
+  const d = new Date(f.date + 'T00:00:00')
+  const day = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+  return `${f.home} vs ${f.away} · ${day}, ${f.time}`
+}
 
 function relativeTime(iso) {
   const diff = Date.now() - new Date(iso).getTime()
@@ -106,6 +123,23 @@ function PostCard({ post }) {
           <span style={{ color: recipient?.colour }}>{recipient?.name}</span>
         </div>
       )}
+
+      {/* Match reference */}
+      {post.fixture_id && (() => {
+        const f = fixtures.find(x => x.id === post.fixture_id)
+        if (!f) return null
+        const homeFlagUrl = flagUrl(f.home)
+        const awayFlagUrl = flagUrl(f.away)
+        const day = new Date(f.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+        return (
+          <div className="post-card__fixture">
+            {homeFlagUrl && <img src={homeFlagUrl} className="post-card__fixture-flag" alt="" />}
+            {f.home} vs {f.away}
+            {awayFlagUrl && <img src={awayFlagUrl} className="post-card__fixture-flag" alt="" />}
+            <span className="post-card__fixture-date">· {day}, {f.time}</span>
+          </div>
+        )
+      })()}
 
       {/* Message */}
       <p className="post-card__message">{post.message}</p>
@@ -238,6 +272,7 @@ export function PostItBoard({ selectedUser }) {
   const [filter, setFilter]                 = useState('all')
   const [authorSlug, setAuthorSlug]         = useState('')
   const [recipientSlug, setRecipientSlug]   = useState('')
+  const [fixtureId, setFixtureId]           = useState('')
   const [message, setMessage]               = useState('')
   const [submitting, setSubmitting]         = useState(false)
 
@@ -282,12 +317,13 @@ export function PostItBoard({ selectedUser }) {
     const { error } = await supabase.from('posts').insert({
       author_slug:    authorSlug,
       recipient_slug: recipientSlug || null,
+      fixture_id:     fixtureId ? Number(fixtureId) : null,
       message:        message.trim(),
       status:         'open',
     })
 
     if (error) setError(error.message)
-    else { setMessage(''); setRecipientSlug('') }
+    else { setMessage(''); setRecipientSlug(''); setFixtureId('') }
     setSubmitting(false)
   }
 
@@ -330,9 +366,19 @@ export function PostItBoard({ selectedUser }) {
             }
           </select>
         </div>
+        <select
+          className="post-compose__select post-compose__select--full"
+          value={fixtureId}
+          onChange={e => setFixtureId(e.target.value)}
+        >
+          <option value="">No specific match</option>
+          {UPCOMING.map(f => (
+            <option key={f.id} value={f.id}>{formatFixtureLabel(f)}</option>
+          ))}
+        </select>
         <textarea
           className="post-compose__textarea"
-          placeholder="🍻 Write your challenge here... 💰"
+          placeholder="Write a challenge, prediction or bit of banter..."
           value={message}
           onChange={e => setMessage(e.target.value)}
           rows={3}

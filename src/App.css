@@ -797,6 +797,7 @@ button { cursor: pointer; font-family: inherit; }
 
 .post-compose__select:focus { outline: none; border-color: var(--gold); }
 .post-compose__select option { background: var(--bg-card); }
+.post-compose__select--full  { width: 100%; margin-bottom: 0.75rem; }
 
 .post-compose__textarea {
   width: 100%;
@@ -911,6 +912,31 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 .post-card__recipient-label { opacity: 0.5; }
+
+.post-card__fixture {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+.post-card__fixture-flag {
+  width: 16px;
+  height: 12px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.post-card__fixture-date {
+  color: var(--text-muted);
+}
 
 .post-card__message {
   font-size: 0.9rem;
