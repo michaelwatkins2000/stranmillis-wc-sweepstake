@@ -242,6 +242,12 @@ export function PostItBoard({ selectedUser }) {
   const [submitting, setSubmitting]         = useState(false)
 
   useEffect(() => {
+    if (!supabase) {
+      setError('Challenges board is not configured (missing environment variables).')
+      setLoading(false)
+      return
+    }
+
     fetchPosts()
 
     const channel = supabase
