@@ -115,7 +115,7 @@ export default function App() {
           {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
           {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
           {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
-          {activeTab === 'postit'   && <PostItBoard />}
+          {activeTab === 'postit'   && <PostItBoard selectedUser={selectedUser} />}
         </div>
       </div>
     </div>
