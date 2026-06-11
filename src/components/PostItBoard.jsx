@@ -378,7 +378,7 @@ export function PostItBoard({ selectedUser }) {
         </select>
         <textarea
           className="post-compose__textarea"
-          placeholder="Write a challenge, prediction or bit of banter..."
+          placeholder="💰 Write your Challenge here... 🍻"
           value={message}
           onChange={e => setMessage(e.target.value)}
           rows={3}
