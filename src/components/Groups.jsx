@@ -28,36 +28,74 @@ function getFlag(team) {
   return info ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${info.flag}.svg` : null
 }
 
-function computeStandings(groupLetter, teamList) {
-  // Seed from groups.js so team order/names are preserved
-  const stats = {}
-  teamList.forEach(t => {
-    stats[t.team] = { team: t.team, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0 }
-  })
+// For teams tied on points, build a mini-table of only their mutual matches
+// and sort by mini-table pts → mini-table gd → mini-table gf → overall gd → overall gf.
+function rankByH2H(tied, played) {
+  const names = tied.map(t => t.team)
+  const h2h = Object.fromEntries(names.map(n => [n, { pts: 0, gd: 0, gf: 0 }]))
 
-  fixtures
-    .filter(f => f.stage === 'group' && f.group === groupLetter && f.homeScore !== null && f.awayScore !== null)
+  played
+    .filter(f => names.includes(f.home) && names.includes(f.away))
     .forEach(f => {
-      const h = stats[f.home]
-      const a = stats[f.away]
-      if (!h || !a) return
-
-      h.played++; a.played++
-      h.gf += f.homeScore; h.ga += f.awayScore
-      a.gf += f.awayScore; a.ga += f.homeScore
-
-      if (f.homeScore > f.awayScore) {
-        h.won++; a.lost++
-      } else if (f.homeScore < f.awayScore) {
-        a.won++; h.lost++
-      } else {
-        h.drawn++; a.drawn++
-      }
+      const [h, a] = [f.homeScore, f.awayScore]
+      if (h > a)        { h2h[f.home].pts += 3 }
+      else if (h === a) { h2h[f.home].pts += 1; h2h[f.away].pts += 1 }
+      else              { h2h[f.away].pts += 3 }
+      h2h[f.home].gd += h - a;  h2h[f.away].gd += a - h
+      h2h[f.home].gf += h;      h2h[f.away].gf += a
     })
 
-  return Object.values(stats)
-    .map(t => ({ ...t, gd: t.gf - t.ga, pts: t.won * 3 + t.drawn }))
-    .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf)
+  return [...tied].sort((a, b) => {
+    const [ma, mb] = [h2h[a.team], h2h[b.team]]
+    if (mb.pts !== ma.pts) return mb.pts - ma.pts
+    if (mb.gd  !== ma.gd)  return mb.gd  - ma.gd
+    if (mb.gf  !== ma.gf)  return mb.gf  - ma.gf
+    if (b.gd   !== a.gd)   return b.gd   - a.gd
+    return b.gf - a.gf
+  })
+}
+
+function computeStandings(groupLetter, teamList) {
+  const stats = {}
+  teamList.forEach(t => {
+    stats[t] = { team: t, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0 }
+  })
+
+  const played = fixtures.filter(
+    f => f.stage === 'group' && f.group === groupLetter && f.homeScore !== null && f.awayScore !== null
+  )
+
+  played.forEach(f => {
+    const h = stats[f.home]
+    const a = stats[f.away]
+    if (!h || !a) return
+
+    h.played++; a.played++
+    h.gf += f.homeScore; h.ga += f.awayScore
+    a.gf += f.awayScore; a.ga += f.homeScore
+
+    if (f.homeScore > f.awayScore)      { h.won++; a.lost++ }
+    else if (f.homeScore < f.awayScore) { a.won++; h.lost++ }
+    else                                { h.drawn++; a.drawn++ }
+  })
+
+  const rows = Object.values(stats).map(t => ({
+    ...t, gd: t.gf - t.ga, pts: t.won * 3 + t.drawn,
+  }))
+
+  // Primary sort: pts → overall gd → overall gf
+  rows.sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf)
+
+  // Re-sort any runs of teams tied on points using head-to-head
+  let i = 0
+  while (i < rows.length) {
+    let j = i + 1
+    while (j < rows.length && rows[j].pts === rows[i].pts) j++
+    if (j - i > 1) rows.splice(i, j - i, ...rankByH2H(rows.slice(i, j), played))
+    i = j
+  }
+
+  return rows
 }
 
 function GroupTable({ letter, teams, selectedUser }) {

@@ -6,11 +6,13 @@ import { Fixtures } from './components/Fixtures'
 import { Groups } from './components/Groups'
 import { Knockout } from './components/Knockout'
 import { PostItBoard } from './components/PostItBoard'
+import { TeamStatus } from './components/TeamStatus'
 
 const TABS = [
   { id: 'fixtures',   label: '🗓 Fixtures' },
   { id: 'groups',     label: '📊 Groups' },
   { id: 'knockout',   label: '🥊 Knockout' },
+  { id: 'teams',      label: '⚽ Teams' },
   { id: 'postit',     label: '📌 Challenges' },
   { id: 'champions',  label: '🏆 Champions', href: 'https://www.youtube.com/watch?v=RJqimlFcJsM' },
 ]
@@ -115,6 +117,7 @@ export default function App() {
           {activeTab === 'fixtures' && <Fixtures selectedUser={selectedUser} />}
           {activeTab === 'groups'   && <Groups   selectedUser={selectedUser} />}
           {activeTab === 'knockout' && <Knockout selectedUser={selectedUser} />}
+          {activeTab === 'teams'    && <TeamStatus  selectedUser={selectedUser} />}
           {activeTab === 'postit'   && <PostItBoard selectedUser={selectedUser} />}
         </div>
       </div>

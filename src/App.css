@@ -314,6 +314,12 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 /* Status-coloured variants */
+.pill--competing  { border-color: rgba(76, 175, 133, 0.4); color: #4caf85; }
+.pill--eliminated { border-color: rgba(224, 90, 90, 0.4);  color: #e05a5a; }
+
+.pill--competing.pill--active  { background: rgba(76, 175, 133, 0.18); border-color: #4caf85; color: #4caf85; font-weight: 600; }
+.pill--eliminated.pill--active { background: rgba(224, 90, 90, 0.18);  border-color: #e05a5a; color: #e05a5a; font-weight: 600; }
+
 .pill--open      { border-color: rgba(91, 155, 213, 0.4); color: #5b9bd5; }
 .pill--accepted  { border-color: rgba(76, 175, 133, 0.4); color: #4caf85; }
 .pill--completed { border-color: rgba(200, 160, 60, 0.4);  color: #c8a03c; }
@@ -1129,6 +1135,97 @@ button { cursor: pointer; font-family: inherit; }
 @media (max-width: 600px) {
   .post-compose__row { flex-direction: column; }
   .post-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Coming Soon ──────────────────────────────────── */
+/* ── Team Status ──────────────────────────────────── */
+.status-section {
+  margin-bottom: 2rem;
+}
+
+.status-section__title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+
+.team-status-card {
+  background: rgba(76, 175, 133, 0.2);
+  border: 1px solid rgba(76, 175, 133, 0.35);
+  border-top: 3px solid var(--colour);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  box-shadow: var(--card-shadow);
+}
+
+.team-status-card--out {
+  background: rgba(224, 90, 90, 0.14);
+  border-color: rgba(224, 90, 90, 0.3);
+}
+
+.team-status-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+}
+
+.team-status-card__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.team-status-card__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.team-status-card__teams {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.team-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem 0.2rem 0.3rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+.team-chip--out .team-chip__name {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.team-chip__flag {
+  width: 18px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .status-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── Coming Soon ──────────────────────────────────── */
