@@ -753,10 +753,21 @@ button { cursor: pointer; font-family: inherit; }
   text-overflow: ellipsis;
 }
 
-.bracket-team__owner {
-  font-size: 0.65rem;
-  white-space: nowrap;
-  opacity: 0.85;
+.bracket-team__avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.bracket-team__avatar--empty {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
 }
 
 .bracket-team__score {
@@ -1306,5 +1317,4 @@ button { cursor: pointer; font-family: inherit; }
 
   /* Knockout */
   .bracket-round { width: 155px; }
-  .bracket-team__owner { display: none; }
 }

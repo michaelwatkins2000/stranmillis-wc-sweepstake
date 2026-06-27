@@ -22,6 +22,20 @@ function TeamRow({ team, user, score, isWinner, isLabel }) {
   return (
     <div className={`bracket-team ${isWinner ? 'bracket-team--winner' : ''} ${isLabel ? 'bracket-team--tbd' : ''}`}>
       <div className="bracket-team__info">
+        {user ? (
+          <img
+            src={`${import.meta.env.BASE_URL}avatars/${user.avatar}`}
+            alt={user.name}
+            className="bracket-team__avatar"
+            style={{ borderColor: user.colour }}
+            onError={e => {
+              e.target.src = `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="${user.colour}"/><text x="50" y="50" text-anchor="middle" dominant-baseline="central" fill="white" font-family="sans-serif" font-size="42" font-weight="700">${user.name.charAt(0)}</text></svg>`)}`
+              e.target.onerror = null
+            }}
+          />
+        ) : (
+          <div className="bracket-team__avatar bracket-team__avatar--empty" />
+        )}
         {flagSrc && (
           <img
             src={flagSrc}
@@ -31,11 +45,6 @@ function TeamRow({ team, user, score, isWinner, isLabel }) {
           />
         )}
         <span className="bracket-team__name">{team || 'TBD'}</span>
-        {user && (
-          <span className="bracket-team__owner" style={{ color: user.colour }}>
-            {user.name}
-          </span>
-        )}
       </div>
       <span className="bracket-team__score">
         {score !== null && score !== undefined ? score : ''}
