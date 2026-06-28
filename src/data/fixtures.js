@@ -71,10 +71,10 @@ export const fixtures = [
   { id: 537368, date: "2026-06-27", time: "04:00", stage: "group", group: "G", home: "Egypt",                away: "Iran",                  homeScore: 1, awayScore: 1 },
   { id: 537413, date: "2026-06-27", time: "22:00", stage: "group", group: "L", home: "Panama",               away: "England",               homeScore: 0, awayScore: 2 },
   { id: 537414, date: "2026-06-27", time: "22:00", stage: "group", group: "L", home: "Croatia",              away: "Ghana",                 homeScore: 2, awayScore: 1 },
-  { id: 537407, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "Colombia",             away: "Portugal",              homeScore: null, awayScore: null },
-  { id: 537408, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "DR Congo",             away: "Uzbekistan",            homeScore: null, awayScore: null },
-  { id: 537401, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Jordan",               away: "Argentina",             homeScore: null, awayScore: null },
-  { id: 537402, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Algeria",              away: "Austria",               homeScore: null, awayScore: null },
+  { id: 537407, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "Colombia",             away: "Portugal",              homeScore: 0, awayScore: 0 },
+  { id: 537408, date: "2026-06-28", time: "00:30", stage: "group", group: "K", home: "DR Congo",             away: "Uzbekistan",            homeScore: 3, awayScore: 1 },
+  { id: 537401, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Jordan",               away: "Argentina",             homeScore: 1, awayScore: 3 },
+  { id: 537402, date: "2026-06-28", time: "03:00", stage: "group", group: "J", home: "Algeria",              away: "Austria",               homeScore: 3, awayScore: 3 },
 
   // ── Round of 32 ──────────────────────────────────────────────────────────
   { id: 537417, date: "2026-06-28", time: "20:00", stage: "r32", group: null, home: "South Africa", away: "Canada", homeScore: null, awayScore: null },
