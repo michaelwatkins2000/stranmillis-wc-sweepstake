@@ -19,7 +19,7 @@ export const bracket = {
     { id: "r32_12", apiId: 537419, date: "2026-07-03", time: "00:00", homeLabel: "1st Group H",   awayLabel: "2nd Group J",     home: "Portugal", away: "Croatia", homeScore: null, awayScore: null },
     { id: "r32_13", apiId: 537429, date: "2026-07-03", time: "04:00", homeLabel: "1st Group B",   awayLabel: "3rd E/F/G/I/J",   home: "Switzerland", away: "Algeria", homeScore: null, awayScore: null },
     { id: "r32_14", apiId: 537428, date: "2026-07-03", time: "19:00", homeLabel: "1st Group J",   awayLabel: "2nd Group H",     home: "Australia", away: "Egypt", homeScore: null, awayScore: null },
-    { id: "r32_15", apiId: 537427, date: "2026-07-03", time: "23:00", homeLabel: "1st Group K",   awayLabel: "3rd D/E/I/J/L",   home: "Argentina", away: "Cape Verde Islands", homeScore: null, awayScore: null },
+    { id: "r32_15", apiId: 537427, date: "2026-07-03", time: "23:00", homeLabel: "1st Group K",   awayLabel: "3rd D/E/I/J/L",   home: "Argentina", away: "Cape Verde", homeScore: null, awayScore: null },
     { id: "r32_16", apiId: 537430, date: "2026-07-04", time: "02:30", homeLabel: "2nd Group D",   awayLabel: "2nd Group G",     home: "Colombia", away: "Ghana", homeScore: null, awayScore: null },
   ],
   r16: [

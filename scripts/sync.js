@@ -21,6 +21,7 @@ const NAME_MAP = {
   'Bosnia and Herzegovina': 'Bosnia & Herzegovina',
   'Bosnia-Herzegovina':     'Bosnia & Herzegovina',
   'Congo DR':               'DR Congo',
+  'Cape Verde Islands':     'Cape Verde',
   'Curacao':                'Curaçao',
 }
 

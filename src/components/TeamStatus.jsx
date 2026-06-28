@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { users } from '../data/users'
 import { assignments } from '../data/sweepstake'
 import { fixtures } from '../data/fixtures'
-import { groups } from '../data/groups'
+// import { groups } from '../data/groups'  // needed for group-stage elimination logic below
 
 // Returns all teams assigned to a user as [{ team, flagCode }]
 function getUserTeams(slug) {
@@ -11,101 +11,94 @@ function getUserTeams(slug) {
     .map(([team, info]) => ({ team, flagCode: info.flag }))
 }
 
-// Derive standings for a group purely from fixture results
-function getGroupStandings(groupLetter) {
-  const teamNames = groups[groupLetter] || []
-  const stats = Object.fromEntries(
-    teamNames.map(t => [t, { pts: 0, played: 0, gd: 0, gf: 0 }])
-  )
+// ---------------------------------------------------------------------------
+// GROUP-STAGE ELIMINATION LOGIC (WC 2026 format: 8 of 12 third-placed teams
+// advance). Used while the group stage is in progress. Once the bracket is
+// fully populated, switch to the presence-based logic below instead.
+//
+// To reactivate: uncomment this block, the groups import above, and swap
+// isEliminated to call isGroupEliminated || isKnockoutEliminated.
+//
+// function getGroupStandings(groupLetter) {
+//   const teamNames = groups[groupLetter] || []
+//   const stats = Object.fromEntries(
+//     teamNames.map(t => [t, { pts: 0, played: 0, gd: 0, gf: 0 }])
+//   )
+//   fixtures
+//     .filter(f => f.stage === 'group' && f.group === groupLetter && f.homeScore !== null)
+//     .forEach(f => {
+//       if (!stats[f.home] || !stats[f.away]) return
+//       const [h, a] = [f.homeScore, f.awayScore]
+//       stats[f.home].played++; stats[f.away].played++
+//       stats[f.home].gf += h;  stats[f.away].gf += a
+//       stats[f.home].gd += h - a; stats[f.away].gd += a - h
+//       if (h > a)        { stats[f.home].pts += 3 }
+//       else if (h === a) { stats[f.home].pts += 1; stats[f.away].pts += 1 }
+//       else              { stats[f.away].pts += 3 }
+//     })
+//   return Object.entries(stats)
+//     .map(([team, s]) => ({ team, ...s }))
+//     .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf)
+// }
+//
+// function teamGroup(team) {
+//   return Object.entries(groups).find(([, teams]) => teams.includes(team))?.[0] ?? null
+// }
+//
+// function isGroupEliminated(team) {
+//   const groupLetter = teamGroup(team)
+//   if (!groupLetter) return false
+//   const groupSize = (groups[groupLetter] || []).length
+//   const gamesPerTeam = groupSize - 1
+//   const standings = getGroupStandings(groupLetter)
+//   const row = standings.find(s => s.team === team)
+//   if (!row) return false
+//   const maxPts = row.pts + (gamesPerTeam - row.played) * 3
+//   function beatenBy(otherTeam) {
+//     const match = fixtures.find(f =>
+//       f.stage === 'group' && f.group === groupLetter && f.homeScore !== null &&
+//       ((f.home === team && f.away === otherTeam) || (f.home === otherTeam && f.away === team))
+//     )
+//     if (!match) return false
+//     return match.home === otherTeam
+//       ? match.homeScore > match.awayScore
+//       : match.awayScore > match.homeScore
+//   }
+//   const others = standings.filter(s => s.team !== team)
+//   const guaranteedAbove = others.filter(s =>
+//     s.pts > maxPts || (s.pts === maxPts && beatenBy(s.team))
+//   )
+//   if (guaranteedAbove.length >= 3) return true
+//   if (row.played >= gamesPerTeam) return standings.indexOf(row) + 1 > 3
+//   return false
+// }
+//
+// function isKnockoutEliminated(team) {
+//   const knockoutStages = ['r32', 'r16', 'qf', 'sf', 'final']
+//   return fixtures.some(f => {
+//     if (!knockoutStages.includes(f.stage)) return false
+//     if (f.homeScore === null) return false
+//     if (f.home === team) return f.awayScore > f.homeScore
+//     if (f.away === team) return f.homeScore > f.awayScore
+//     return false
+//   })
+// }
+// ---------------------------------------------------------------------------
 
-  fixtures
-    .filter(f => f.stage === 'group' && f.group === groupLetter && f.homeScore !== null)
-    .forEach(f => {
-      if (!stats[f.home] || !stats[f.away]) return
-      const [h, a] = [f.homeScore, f.awayScore]
-      stats[f.home].played++; stats[f.away].played++
-      stats[f.home].gf += h;  stats[f.away].gf += a
-      stats[f.home].gd += h - a; stats[f.away].gd += a - h
-      if (h > a)        { stats[f.home].pts += 3 }
-      else if (h === a) { stats[f.home].pts += 1; stats[f.away].pts += 1 }
-      else              { stats[f.away].pts += 3 }
-    })
+const knockoutFixtures = fixtures.filter(f => f.stage !== 'group')
 
-  return Object.entries(stats)
-    .map(([team, s]) => ({ team, ...s }))
-    .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf)
-}
+// A team is eliminated if they never appear in the knockout bracket (group-stage exit),
+// or if they appeared in a knockout match and lost.
+function isEliminated(team) {
+  const inBracket = knockoutFixtures.some(f => f.home === team || f.away === team)
+  if (!inBracket) return true
 
-// Find which group a team belongs to
-function teamGroup(team) {
-  return Object.entries(groups).find(([, teams]) => teams.includes(team))?.[0] ?? null
-}
-
-// --- Elimination logic ---
-// A team is eliminated when they can no longer qualify. Two routes:
-//   1. Group stage: played all 3 games and finished 3rd or 4th in their group
-//   2. Knockout stage: appeared in a knockout match and lost
-
-function isGroupEliminated(team) {
-  const groupLetter = teamGroup(team)
-  if (!groupLetter) return false
-
-  const groupSize = (groups[groupLetter] || []).length
-  const gamesPerTeam = groupSize - 1
-
-  const standings = getGroupStandings(groupLetter)
-  const row = standings.find(s => s.team === team)
-  if (!row) return false
-
-  const maxPts = row.pts + (gamesPerTeam - row.played) * 3
-
-  // Returns true if otherTeam won the head-to-head match against `team`
-  function beatenBy(otherTeam) {
-    const match = fixtures.find(f =>
-      f.stage === 'group' && f.group === groupLetter && f.homeScore !== null &&
-      ((f.home === team && f.away === otherTeam) || (f.home === otherTeam && f.away === team))
-    )
-    if (!match) return false
-    return match.home === otherTeam
-      ? match.homeScore > match.awayScore
-      : match.awayScore > match.homeScore
-  }
-
-  // WC 2026: 8 of 12 third-placed teams advance, so 3rd is not guaranteed eliminated.
-  // A team is only out when all 3 others are guaranteed above them (locking in 4th place).
-  //
-  // Team X is guaranteed above T if:
-  //   - X.pts > T.maxPts (unreachable even if T wins everything), OR
-  //   - X.pts === T.maxPts AND X already beat T head-to-head
-  //     (if T maxes out and ties X on points, X wins the tiebreaker)
-  const others = standings.filter(s => s.team !== team)
-  const guaranteedAbove = others.filter(s =>
-    s.pts > maxPts || (s.pts === maxPts && beatenBy(s.team))
-  )
-  if (guaranteedAbove.length >= 3) return true
-
-  // After all group games are played: 4th place is eliminated.
-  // 3rd place may still qualify as one of the 8 best third-placed teams.
-  if (row.played >= gamesPerTeam) {
-    return standings.indexOf(row) + 1 > 3
-  }
-
-  return false
-}
-
-function isKnockoutEliminated(team) {
-  const knockoutStages = ['r32', 'r16', 'qf', 'sf', 'final']
-  return fixtures.some(f => {
-    if (!knockoutStages.includes(f.stage)) return false
+  return knockoutFixtures.some(f => {
     if (f.homeScore === null) return false
     if (f.home === team) return f.awayScore > f.homeScore
     if (f.away === team) return f.homeScore > f.awayScore
     return false
   })
-}
-
-function isEliminated(team) {
-  return isGroupEliminated(team) || isKnockoutEliminated(team)
 }
 
 // --- Components ---
