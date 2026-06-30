@@ -7,7 +7,7 @@ export const bracket = {
   r32: [
     { id: "r32_1",  apiId: 537417, date: "2026-06-28", time: "20:00", homeLabel: "2nd Group A",   awayLabel: "2nd Group B",     home: "South Africa", away: "Canada", homeScore: 0, awayScore: 1 },
     { id: "r32_2",  apiId: 537423, date: "2026-06-29", time: "18:00", homeLabel: "1st Group E",   awayLabel: "3rd A/B/C/D/F",   home: "Brazil", away: "Japan", homeScore: 2, awayScore: 1 },
-    { id: "r32_3",  apiId: 537415, date: "2026-06-29", time: "21:30", homeLabel: "1st Group F",   awayLabel: "2nd Group C",     home: "Germany", away: "Paraguay", homeScore: 5, awayScore: 6 },
+    { id: "r32_3",  apiId: 537415, date: "2026-06-29", time: "21:30", homeLabel: "1st Group F",   awayLabel: "2nd Group C",     home: "Germany", away: "Paraguay", homeScore: 4, awayScore: 5 },
     { id: "r32_4",  apiId: 537418, date: "2026-06-30", time: "02:00", homeLabel: "1st Group C",   awayLabel: "2nd Group F",     home: "Netherlands", away: "Morocco", homeScore: null, awayScore: null },
     { id: "r32_5",  apiId: 537424, date: "2026-06-30", time: "18:00", homeLabel: "1st Group I",   awayLabel: "3rd C/D/F/G/H",   home: "Ivory Coast", away: "Norway", homeScore: null, awayScore: null },
     { id: "r32_6",  apiId: 537416, date: "2026-06-30", time: "22:00", homeLabel: "2nd Group E",   awayLabel: "2nd Group I",     home: "France", away: "Sweden", homeScore: null, awayScore: null },
