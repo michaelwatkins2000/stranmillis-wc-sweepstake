@@ -81,7 +81,7 @@ export const fixtures = [
   { id: 537423, date: "2026-06-29", time: "18:00", stage: "r32", group: null, home: "Brazil", away: "Japan", homeScore: 2, awayScore: 1 },
   { id: 537415, date: "2026-06-29", time: "21:30", stage: "r32", group: null, home: "Germany", away: "Paraguay", homeScore: 4, awayScore: 5 },
   { id: 537418, date: "2026-06-30", time: "02:00", stage: "r32", group: null, home: "Netherlands", away: "Morocco", homeScore: 3, awayScore: 4 },
-  { id: 537424, date: "2026-06-30", time: "18:00", stage: "r32", group: null, home: "Ivory Coast", away: "Norway", homeScore: null, awayScore: null },
+  { id: 537424, date: "2026-06-30", time: "18:00", stage: "r32", group: null, home: "Ivory Coast", away: "Norway", homeScore: 1, awayScore: 2 },
   { id: 537416, date: "2026-06-30", time: "22:00", stage: "r32", group: null, home: "France", away: "Sweden", homeScore: null, awayScore: null },
   { id: 537425, date: "2026-07-01", time: "02:00", stage: "r32", group: null, home: "Mexico", away: "Ecuador", homeScore: null, awayScore: null },
   { id: 537426, date: "2026-07-01", time: "17:00", stage: "r32", group: null, home: "England", away: "DR Congo", homeScore: null, awayScore: null },
