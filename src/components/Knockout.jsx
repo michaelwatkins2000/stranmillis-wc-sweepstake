@@ -17,10 +17,10 @@ function getFlag(team) {
   return info ? `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${info.flag}.svg` : null
 }
 
-function TeamRow({ team, user, score, isWinner, isLabel }) {
+function TeamRow({ team, user, score, isWinner, isLoser, isLabel }) {
   const flagSrc = isLabel ? null : getFlag(team)
   return (
-    <div className={`bracket-team ${isWinner ? 'bracket-team--winner' : ''} ${isLabel ? 'bracket-team--tbd' : ''}`}>
+    <div className={`bracket-team ${isWinner ? 'bracket-team--winner' : ''} ${isLoser ? 'bracket-team--dim' : ''} ${isLabel ? 'bracket-team--tbd' : ''}`}>
       <div className="bracket-team__info">
         {user ? (
           <img
@@ -88,12 +88,12 @@ function MatchSlot({ match, selectedUser, hasInputArm }) {
       )}
       <TeamRow
         team={homeDisplay} user={homeUser}
-        score={match.homeScore} isWinner={homeWin} isLabel={homeIsLabel}
+        score={match.homeScore} isWinner={homeWin} isLoser={awayWin} isLabel={homeIsLabel}
       />
       <div className="bracket-slot__divider" />
       <TeamRow
         team={awayDisplay} user={awayUser}
-        score={match.awayScore} isWinner={awayWin} isLabel={awayIsLabel}
+        score={match.awayScore} isWinner={awayWin} isLoser={homeWin} isLabel={awayIsLabel}
       />
     </div>
   )

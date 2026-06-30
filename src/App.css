@@ -735,6 +735,7 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 .bracket-team--winner { background: rgba(201, 168, 76, 0.1); }
+.bracket-team--dim { opacity: var(--dim); }
 .bracket-team--tbd .bracket-team__name { color: var(--text-muted); font-style: italic; }
 
 .bracket-team__info {
