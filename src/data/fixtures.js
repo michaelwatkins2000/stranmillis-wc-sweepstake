@@ -99,10 +99,10 @@ export const fixtures = [
   { id: 537375, date: "2026-07-04", time: "22:00", stage: "r16", group: null, home: "Paraguay", away: "France", homeScore: null, awayScore: null },
   { id: 537377, date: "2026-07-05", time: "21:00", stage: "r16", group: null, home: "Brazil", away: "Norway", homeScore: null, awayScore: null },
   { id: 537378, date: "2026-07-06", time: "01:00", stage: "r16", group: null, home: "Mexico", away: "England", homeScore: null, awayScore: null },
-  { id: 537379, date: "2026-07-06", time: "20:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537379, date: "2026-07-06", time: "20:00", stage: "r16", group: null, home: "Portugal", away: "Spain", homeScore: null, awayScore: null },
   { id: 537380, date: "2026-07-07", time: "01:00", stage: "r16", group: null, home: "USA", away: "Belgium", homeScore: null, awayScore: null },
-  { id: 537381, date: "2026-07-07", time: "17:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
-  { id: 537382, date: "2026-07-07", time: "21:00", stage: "r16", group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537381, date: "2026-07-07", time: "17:00", stage: "r16", group: null, home: "Argentina", away: "Egypt", homeScore: null, awayScore: null },
+  { id: 537382, date: "2026-07-07", time: "21:00", stage: "r16", group: null, home: "Switzerland", away: "Colombia", homeScore: null, awayScore: null },
 
   // ── Quarter-finals ───────────────────────────────────────────────────────
   { id: 537383, date: "2026-07-09", time: "21:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },

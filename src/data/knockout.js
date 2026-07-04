@@ -31,12 +31,12 @@ export const bracket = {
   r16: [
     { id: "r16_1", apiId: 537376, date: "2026-07-04", time: "18:00", home: "Canada", away: "Morocco", homeScore: null, awayScore: null },
     { id: "r16_2", apiId: 537375, date: "2026-07-04", time: "22:00", home: "Paraguay", away: "France", homeScore: null, awayScore: null },
-    { id: "r16_3", apiId: 537379, date: "2026-07-06", time: "20:00", home: null, away: null, homeScore: null, awayScore: null },
+    { id: "r16_3", apiId: 537379, date: "2026-07-06", time: "20:00", home: "Portugal", away: "Spain", homeScore: null, awayScore: null },
     { id: "r16_4", apiId: 537380, date: "2026-07-07", time: "01:00", home: "USA", away: "Belgium", homeScore: null, awayScore: null },
     { id: "r16_5", apiId: 537377, date: "2026-07-05", time: "21:00", home: "Brazil", away: "Norway", homeScore: null, awayScore: null },
     { id: "r16_6", apiId: 537378, date: "2026-07-06", time: "01:00", home: "Mexico", away: "England", homeScore: null, awayScore: null },
-    { id: "r16_7", apiId: 537381, date: "2026-07-07", time: "17:00", home: null, away: null, homeScore: null, awayScore: null },
-    { id: "r16_8", apiId: 537382, date: "2026-07-07", time: "21:00", home: null, away: null, homeScore: null, awayScore: null },
+    { id: "r16_7", apiId: 537381, date: "2026-07-07", time: "17:00", home: "Argentina", away: "Egypt", homeScore: null, awayScore: null },
+    { id: "r16_8", apiId: 537382, date: "2026-07-07", time: "21:00", home: "Switzerland", away: "Colombia", homeScore: null, awayScore: null },
   ],
   qf: [
     { id: "qf_1", apiId: 537383, date: "2026-07-09", time: "21:00", home: null, away: null, homeScore: null, awayScore: null },
