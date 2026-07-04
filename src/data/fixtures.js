@@ -92,7 +92,7 @@ export const fixtures = [
   { id: 537429, date: "2026-07-03", time: "04:00", stage: "r32", group: null, home: "Switzerland", away: "Algeria", homeScore: 2, awayScore: 0 },
   { id: 537428, date: "2026-07-03", time: "19:00", stage: "r32", group: null, home: "Australia", away: "Egypt", homeScore: 3, awayScore: 5 },
   { id: 537427, date: "2026-07-03", time: "23:00", stage: "r32", group: null, home: "Argentina", away: "Cape Verde", homeScore: 3, awayScore: 2 },
-  { id: 537430, date: "2026-07-04", time: "02:30", stage: "r32", group: null, home: "Colombia", away: "Ghana", homeScore: null, awayScore: null },
+  { id: 537430, date: "2026-07-04", time: "02:30", stage: "r32", group: null, home: "Colombia", away: "Ghana", homeScore: 1, awayScore: 0 },
 
   // ── Round of 16 ──────────────────────────────────────────────────────────
   { id: 537376, date: "2026-07-04", time: "18:00", stage: "r16", group: null, home: "Canada", away: "Morocco", homeScore: null, awayScore: null },
