@@ -40,7 +40,7 @@ export const bracket = {
   ],
   qf: [
     { id: "qf_1", apiId: 537383, date: "2026-07-09", time: "21:00", home: "France", away: "Morocco", homeScore: null, awayScore: null },
-    { id: "qf_2", apiId: 537384, date: "2026-07-10", time: "20:00", home: null, away: null, homeScore: null, awayScore: null },
+    { id: "qf_2", apiId: 537384, date: "2026-07-10", time: "20:00", home: "Spain", away: "Belgium", homeScore: null, awayScore: null },
     { id: "qf_3", apiId: 537385, date: "2026-07-11", time: "22:00", home: "Norway", away: "England", homeScore: null, awayScore: null },
     { id: "qf_4", apiId: 537386, date: "2026-07-12", time: "02:00", home: null, away: null, homeScore: null, awayScore: null },
   ],
