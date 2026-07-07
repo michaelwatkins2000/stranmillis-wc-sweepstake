@@ -32,7 +32,7 @@ export const bracket = {
     { id: "r16_1", apiId: 537376, date: "2026-07-04", time: "18:00", home: "Canada", away: "Morocco", homeScore: 0, awayScore: 3 },
     { id: "r16_2", apiId: 537375, date: "2026-07-04", time: "22:00", home: "Paraguay", away: "France", homeScore: 0, awayScore: 1 },
     { id: "r16_3", apiId: 537379, date: "2026-07-06", time: "20:00", home: "Portugal", away: "Spain", homeScore: 0, awayScore: 1 },
-    { id: "r16_4", apiId: 537380, date: "2026-07-07", time: "01:00", home: "USA", away: "Belgium", homeScore: null, awayScore: null },
+    { id: "r16_4", apiId: 537380, date: "2026-07-07", time: "01:00", home: "USA", away: "Belgium", homeScore: 1, awayScore: 4 },
     { id: "r16_5", apiId: 537377, date: "2026-07-05", time: "21:00", home: "Brazil", away: "Norway", homeScore: 1, awayScore: 2 },
     { id: "r16_6", apiId: 537378, date: "2026-07-06", time: "01:00", home: "Mexico", away: "England", homeScore: 2, awayScore: 3 },
     { id: "r16_7", apiId: 537381, date: "2026-07-07", time: "17:00", home: "Argentina", away: "Egypt", homeScore: null, awayScore: null },
