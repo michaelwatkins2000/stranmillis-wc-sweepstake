@@ -108,7 +108,7 @@ export const fixtures = [
   { id: 537383, date: "2026-07-09", time: "21:00", stage: "qf",    group: null, home: "France", away: "Morocco", homeScore: null, awayScore: null },
   { id: 537384, date: "2026-07-10", time: "20:00", stage: "qf",    group: null, home: "Spain", away: "Belgium", homeScore: null, awayScore: null },
   { id: 537385, date: "2026-07-11", time: "22:00", stage: "qf",    group: null, home: "Norway", away: "England", homeScore: null, awayScore: null },
-  { id: 537386, date: "2026-07-12", time: "02:00", stage: "qf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
+  { id: 537386, date: "2026-07-12", time: "02:00", stage: "qf",    group: null, home: "Argentina", away: "Switzerland", homeScore: null, awayScore: null },
 
   // ── Semi-finals ──────────────────────────────────────────────────────────
   { id: 537387, date: "2026-07-14", time: "20:00", stage: "sf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
