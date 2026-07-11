@@ -111,7 +111,7 @@ export const fixtures = [
   { id: 537386, date: "2026-07-12", time: "02:00", stage: "qf",    group: null, home: "Argentina", away: "Switzerland", homeScore: null, awayScore: null },
 
   // ── Semi-finals ──────────────────────────────────────────────────────────
-  { id: 537387, date: "2026-07-14", time: "20:00", stage: "sf",    group: null, home: "France", away: null, homeScore: null, awayScore: null },
+  { id: 537387, date: "2026-07-14", time: "20:00", stage: "sf",    group: null, home: "France", away: "Spain", homeScore: null, awayScore: null },
   { id: 537388, date: "2026-07-15", time: "20:00", stage: "sf",    group: null, home: null, away: null, homeScore: null, awayScore: null },
 
   // ── Third place & Final ──────────────────────────────────────────────────
