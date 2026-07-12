@@ -46,7 +46,7 @@ export const bracket = {
   ],
   sf: [
     { id: "sf_1", apiId: 537387, date: "2026-07-14", time: "20:00", home: "France", away: "Spain", homeScore: null, awayScore: null },
-    { id: "sf_2", apiId: 537388, date: "2026-07-15", time: "20:00", home: null, away: null, homeScore: null, awayScore: null },
+    { id: "sf_2", apiId: 537388, date: "2026-07-15", time: "20:00", home: "England", away: "Argentina", homeScore: null, awayScore: null },
   ],
   final: [
     { id: "final", apiId: 537390, date: "2026-07-19", time: "20:00", home: null, away: null, homeScore: null, awayScore: null },
