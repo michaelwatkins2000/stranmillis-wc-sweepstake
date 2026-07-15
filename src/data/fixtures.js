@@ -112,7 +112,7 @@ export const fixtures = [
 
   // ── Semi-finals ──────────────────────────────────────────────────────────
   { id: 537387, date: "2026-07-14", time: "20:00", stage: "sf",    group: null, home: "France", away: "Spain", homeScore: 0, awayScore: 2 },
-  { id: 537388, date: "2026-07-15", time: "20:00", stage: "sf",    group: null, home: "England", away: "Argentina", homeScore: null, awayScore: null },
+  { id: 537388, date: "2026-07-15", time: "20:00", stage: "sf",    group: null, home: "England", away: "Argentina", homeScore: 1, awayScore: 2 },
 
   // ── Third place & Final ──────────────────────────────────────────────────
   { id: 537389, date: "2026-07-18", time: "22:00", stage: "3rd",   group: null, home: "France", away: null, homeScore: null, awayScore: null },
